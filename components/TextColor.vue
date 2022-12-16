@@ -9,8 +9,16 @@
 @use '@/scss/var' as var;
 
 .mark{
-    color: var.$highlight;
-    text-shadow: 0px 0px 10px var.$highlight_light;
+    color: var.$highlight_light;
+    $num: 3;
+    $content: '';
+    @for $i from 0 to $num {
+        $content: $content + '0px 0px 20px ' + var.$highlight;
+        @if $i != ($num - 1) {
+            $content: $content + ', ';
+        }
+    }
+    text-shadow: #{$content};
 }
 </style>
 
