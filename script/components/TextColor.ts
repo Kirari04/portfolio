@@ -1,4 +1,3 @@
-import '@/scss/components/TextColor.scss'
 import Vue from 'vue'
 import type { PropType } from 'vue'
 export default Vue.extend({

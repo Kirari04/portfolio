@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import '@/scss/global.scss'
 export default {
     name: 'Default'
