@@ -1,0 +1,12 @@
+@use '_var.scss' as var;
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url(../fonts/Poppins/Poppins-Regular.ttf);
+}
+
+body{
+    background: var.$black;
+    color: var.$white;
+    font-family: 'Poppins-Regular';
+}
