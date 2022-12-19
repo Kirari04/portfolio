@@ -5,6 +5,9 @@
                 <TextItems :texts="lang.$.title" />
             </h1>
         </section>
+        <section class="section_laptop">
+            <Laptop />
+        </section>
     </div>
 </template>
 
@@ -15,10 +18,16 @@
     &_title {
       display: flex;
       justify-content: center;
-      margin: calc(100vh / 3) 0 0 0;
+      padding: calc(100vh / 3) 0 0 0;
       > .title{
         font-size: 40pt;
       }
+    }
+    &_laptop{
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        height: 20000px;
     }
 }
 </style>

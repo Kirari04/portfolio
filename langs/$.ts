@@ -1,8 +1,8 @@
 const langs: LanguagePackages = {
-    de: require('@/langs/de').$ as LanguagePackage
+    en: require('@/langs/en').$
 }
 
-export const $ = {
-    $: langs.de,
+export const $: LanguageController = {
+    $: langs.en,
     list: langs
 };

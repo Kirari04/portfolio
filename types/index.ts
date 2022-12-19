@@ -9,16 +9,29 @@ declare global {
 
     // Language
     interface LanguageController {
-        $: LanguagePackage,
-        list: LanguagePackages
+        $: LanguagePackage;
+        list: LanguagePackages;
     }
     interface LanguagePackages {
-        de: {
-            title: Array<TextColor>
-        }
+        en: LanguagePackage;
     }
     interface LanguagePackage {
-        title: Array<TextColor>
+        title: Array<TextColor>;
+        mywork: {
+            title: Array<TextColor>;
+        }
+        canCode: {
+            title: Array<TextColor>;
+            langs: Array<ProgrammingLanguage>;
+        }
     }
-    
+
+    // Others
+    interface ProgrammingLanguage {
+        name: String;
+        icon: File;
+        experience: Array<TextColor>;
+        teaching: Array<TextColor>;
+        color: String;
+    }
 }
