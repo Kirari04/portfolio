@@ -14,7 +14,7 @@
 
 .laptop{
     position: relative;
-    top: 0;
+    top: 0%;
     display: flex;
     justify-content: center;
     width: 100%;

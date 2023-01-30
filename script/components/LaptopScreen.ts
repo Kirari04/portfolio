@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { showClassBetween, hideClassBetween } from '@/script/func'
+import { showClassBetween, hideClassBetween, percentageSteps } from '@/script/func'
 
 export default Vue.extend({
     props: {
@@ -14,19 +14,26 @@ export default Vue.extend({
             lastPos: 0,
             isFixed: false,
             // pixels
-            step: 1200,
+            step: 600,
             mywork_start: 600,
-            mywork_end: 6600,
-            canCode_start: 6600,
+            mywork_end: 3300,
+            canCode_start: 3300,
             canCode_end: 0,
+            canFramework_start: 0,
+            canFramework_end: 0,
         }
     },
     created() {
+
+
         if(process.client){
             window.addEventListener('scroll', this.onscrollPosition)
             this.onscrollPosition();
         }
+
         this.canCode_end = ((this.lang.$.canCode.langs.length + 1) * this.step) + this.mywork_end;
+        this.canFramework_start = this.canCode_end;
+        this.canFramework_end = ((this.lang.$.canFramework.langs.length + 1) * this.step) + this.canCode_end;
     },
     destroyed() {
         if(process.client){
@@ -71,5 +78,6 @@ export default Vue.extend({
         },
         showClassBetween: showClassBetween,
         hideClassBetween: hideClassBetween,
+        percentageSteps: percentageSteps,
     },
 })

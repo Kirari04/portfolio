@@ -19,11 +19,20 @@ declare global {
         title: Array<TextColor>;
         mywork: {
             title: Array<TextColor>;
+            list: Array<Hobby>;
         }
         canCode: {
             title: Array<TextColor>;
             langs: Array<ProgrammingLanguage>;
         }
+        canFramework: {
+            title: Array<TextColor>;
+            langs: Array<ProgrammingLanguage>;
+        }
+    }
+    interface Hobby {
+        txt: Array<TextColor>
+        img: File
     }
 
     // Others

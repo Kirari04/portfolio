@@ -1,49 +1,92 @@
 <template>
     <div class="screen_container">
         <div :class="`frame mywork ${hideClassBetween(windowPosition, mywork_start, mywork_end, 'hidden')}`">
-            <h2 class="title"><TextItems :texts="lang.$.mywork.title" /></h2>
+            <h2 class="title">
+                <TextItems :texts="lang.$.mywork.title" />
+            </h2>
             <ul>
-                <li :class="`${showClassBetween(windowPosition, ((1 * step) + mywork_start), ((2 * step) + mywork_start), 'mark')}`">
-                    Code
-                </li>
-                <li :class="`${showClassBetween(windowPosition, ((2 * step) + mywork_start), ((3 * step) + mywork_start), 'mark')}`">
-                    Eat
-                </li>
-                <li :class="`${showClassBetween(windowPosition, ((3 * step) + mywork_start), ((4 * step) + mywork_start), 'mark')}`">
-                    Sleep
-                </li>
-                <li :class="`${showClassBetween(windowPosition, ((4 * step) + mywork_start), ((5 * step) + mywork_start), 'mark')}`">
-                    did I mentioned Code?
+                <li v-for="(mywork_item, i) in lang.$.mywork.list" :key="i"
+                    :class="`${showClassBetween(windowPosition, (((1 + i) * step) + mywork_start), (((2 + i) * step) + mywork_start), 'mark')}`">
+                    <TextItems :texts="mywork_item.txt" />
                 </li>
             </ul>
+            <div class="loadingBar"
+                :style="{ width: `${percentageSteps(windowPosition, mywork_start, mywork_end, step)}%` }"></div>
             <div class="images">
-                <img src="" alt="" class="img">
+                <img v-for="(mywork_item, i) in lang.$.mywork.list" :key="i" :src="mywork_item.img"
+                    :alt="mywork_item.txt"
+                    :class="`img ${hideClassBetween(windowPosition, (((1 + i) * step) + mywork_start), (((2 + i) * step) + mywork_start), 'hidden')}`">
             </div>
         </div>
         <div :class="`frame canCode ${hideClassBetween(windowPosition, canCode_start, canCode_end, 'hidden')}`">
-            <h2 class="title"><TextItems :texts="lang.$.canCode.title" /></h2>
+            <h2 class="title">
+                <TextItems :texts="lang.$.canCode.title" />
+            </h2>
             <ul>
                 <li v-for="(lang, i) in lang.$.canCode.langs" :key="i">
                     <!-- Icon -->
                     <img v-if="lang.icon"
-                    :class="`image ${showClassBetween(windowPosition, (((i+1) * step) + canCode_start), (((i+2) * step) + canCode_start), 'mark')}`"
-                    :src="lang.icon" :alt="lang.name" :style="{background: lang.color,}">
+                        :class="`image ${showClassBetween(windowPosition, (((i + 1) * step) + canCode_start), (((i + 2) * step) + canCode_start), 'mark')}`"
+                        :src="lang.icon" :alt="lang.name" :style="{ background: lang.color, }">
                     <div v-if="!lang.icon"
-                    :class="`iconBox ${showClassBetween(windowPosition, (((i+1) * step) + canCode_start), (((i+2) * step) + canCode_start), 'mark')}`"
-                    :style="{background: lang.color,}">
-                        {{lang.name}}
+                        :class="`iconBox ${showClassBetween(windowPosition, (((i + 1) * step) + canCode_start), (((i + 2) * step) + canCode_start), 'mark')}`"
+                        :style="{ background: lang.color, }">
+                        {{ lang.name }}
                     </div>
                     <!-- Description -->
-                    <div :class="`desc ${showClassBetween(windowPosition, (((i+1) * step) + canCode_start), (((i+2) * step) + canCode_start), 'mark')}`">
-                        <p class="teaching"><TextItems :texts="lang.teaching" /></p>
-                        <p class="experience"><TextItems :texts="lang.experience" /></p>
+                    <div
+                        :class="`desc ${showClassBetween(windowPosition, (((i + 1) * step) + canCode_start), (((i + 2) * step) + canCode_start), 'mark')}`">
+                        <p class="teaching">
+                            <TextItems :texts="lang.teaching" />
+                        </p>
+                        <p class="experience">
+                            <TextItems :texts="lang.experience" />
+                        </p>
                     </div>
                 </li>
             </ul>
+            <div class="loadingBar"
+                :style="{ width: `${percentageSteps(windowPosition, canCode_start, canCode_end, step)}%` }">
+            </div>
             <div class="codeNames">
-                <div
-                :class="`codeName ${hideClassBetween(windowPosition, (((i+1) * step) + canCode_start), (((i+2) * step) + canCode_start), 'hidden')}`"
-                v-for="(lang, i) in lang.$.canCode.langs" :key="i">{{lang.name}}</div>
+                <div :class="`codeName ${hideClassBetween(windowPosition, (((i + 1) * step) + canCode_start), (((i + 2) * step) + canCode_start), 'hidden')}`"
+                    v-for="(lang, i) in lang.$.canCode.langs" :key="i">{{ lang.name }}</div>
+            </div>
+        </div>
+        <div
+            :class="`frame canFramework ${hideClassBetween(windowPosition, canFramework_start, canFramework_end, 'hidden')}`">
+            <h2 class="title">
+                <TextItems :texts="lang.$.canFramework.title" />
+            </h2>
+            <ul>
+                <li v-for="(lang, i) in lang.$.canFramework.langs" :key="i">
+                    <!-- Icon -->
+                    <img v-if="lang.icon"
+                        :class="`image ${showClassBetween(windowPosition, (((i + 1) * step) + canFramework_start), (((i + 2) * step) + canFramework_start), 'mark')}`"
+                        :src="lang.icon" :alt="lang.name" :style="{ background: lang.color, }">
+                    <div v-if="!lang.icon"
+                        :class="`iconBox ${showClassBetween(windowPosition, (((i + 1) * step) + canFramework_start), (((i + 2) * step) + canFramework_start), 'mark')}`"
+                        :style="{ background: lang.color, }">
+                        {{ lang.name }}
+                    </div>
+                    <!-- Description -->
+                    <div
+                        :class="`desc ${showClassBetween(windowPosition, (((i + 1) * step) + canFramework_start), (((i + 2) * step) + canFramework_start), 'mark')}`">
+                        <p class="teaching">
+                            <TextItems :texts="lang.teaching" />
+                        </p>
+                        <p class="experience">
+                            <TextItems :texts="lang.experience" />
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <div class="loadingBar"
+                :style="{ width: `${percentageSteps(windowPosition, canFramework_start, canFramework_end, step)}%` }">
+            </div>
+            <div class="codeNames">
+                <div :class="`codeName ${hideClassBetween(windowPosition, (((i + 1) * step) + canFramework_start), (((i + 2) * step) + canFramework_start), 'hidden')}`"
+                    v-for="(lang, i) in lang.$.canFramework.langs" :key="i">{{ lang.name }}</div>
             </div>
         </div>
     </div>
@@ -52,79 +95,123 @@
 <style lang="scss" scoped>
 @use '@/scss/var' as var;
 
-.screen_container{
+.screen_container {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
     color: var.$white;
-    > .frame{
+
+    >.frame {
         padding: var.$space calc(var.$space * 2);
         position: absolute;
         left: 0;
         right: 0;
         width: 100%;
+        height: 100%;
         transition: var.$ani_slow ease;
         transform: translate(0%, 0%);
-        &.hidden{
+
+        &.hidden {
             transform: translate(0%, 50%);
         }
+
+        >.loadingBar {
+            position: absolute;
+            bottom: 10px;
+            left: 0px;
+            width: 0%;
+            height: 5px;
+            background-color: var.$highlight_light;
+            box-shadow: 0px 0px 15px 0px var.$highlight;
+            transition: var.$ani ease;
+        }
     }
-    > .mywork {
-        > .title{
+
+    >.mywork {
+        >.title {
             color: var.$highlight_light;
             font-size: var.$font_size;
+            z-index: 3;
         }
-        > ul{
+
+        >ul {
             display: flex;
             flex-direction: column;
             list-style-type: none;
-            > li{
+            z-index: 3;
+
+            >li {
                 color: var.$blue_light;
                 transition: var.$ani;
-                &.mark{
+
+                &.mark {
                     color: var.$white;
                 }
             }
         }
-        > .images{
+
+        >.images {
             position: absolute;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
+
+            >img {
+                filter: saturate(0);
+                opacity: .4;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                width: 50%;
+                transform: translateY(-50%);
+                transition: var.$ani;
+
+                &.hidden {
+                    opacity: 0;
+                }
+            }
         }
     }
-    > .canCode {
+
+    >.canCode,
+    >.canFramework {
         height: 100%;
-        > .title{
+
+        >.title {
             color: var.$highlight_light;
             font-size: var.$font_size;
         }
-        > ul{
+
+        >ul {
             padding: var.$space 0;
             display: flex;
             flex-direction: column;
             list-style-type: none;
             z-index: 3;
-            > li{
+
+            >li {
                 color: var.$blue_light;
                 transition: var.$ani;
                 display: flex;
                 align-items: center;
-                > .image{
+
+                >.image {
                     box-sizing: content-box;
                     width: calc(var.$space / 1.5);
                     padding: calc(var.$space / 3);
                     border-radius: .5rem;
                     transition: var.$ani;
                     filter: brightness(.2);
-                    &.mark{
+                    &.mark {
                         filter: brightness(1);
                     }
                 }
-                > .iconBox{
+
+                >.iconBox {
                     display: flex;
                     justify-content: center;
                     box-sizing: content-box;
@@ -134,25 +221,30 @@
                     font-size: var.$font_size_small;
                     filter: brightness(.2);
                     color: #000;
-                    &.mark{
+
+                    &.mark {
                         filter: brightness(1);
                     }
                 }
-                > .desc{
+
+                >.desc {
                     padding: calc(var.$space / 2);
                     filter: brightness(.2);
                     transition: var.$ani;
-                    &.mark{
+
+                    &.mark {
                         filter: brightness(1);
                     }
-                    > .teaching,
-                    > .experience{
+
+                    >.teaching,
+                    >.experience {
                         font-size: var.$font_size;
                     }
                 }
             }
         }
-        > .codeNames{
+
+        >.codeNames {
             z-index: 1;
             position: absolute;
             left: 0;
@@ -160,7 +252,8 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            > .codeName{
+
+            >.codeName {
                 position: absolute;
                 right: var.$space;
                 bottom: var.$space;
@@ -169,21 +262,23 @@
         }
     }
 }
-.hidden{
+
+.hidden {
     opacity: 0;
 }
 
 @media only screen and (max-width: 1300px) {
-    .screen_container{
-        > .canCode {
-            > ul{
+    .screen_container {
+
+        >.canCode,
+        >.canFramework {
+            >ul {
                 flex-direction: row;
                 flex-wrap: wrap;
             }
         }
     }
 }
-
 </style>
 
 <script src="@/script/components/LaptopScreen.ts"></script>

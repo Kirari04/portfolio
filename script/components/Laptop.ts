@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { showClassBetween, hideClassBetween } from '@/script/func'
+import { showClassBetween, hideClassBetween, percentageSteps } from '@/script/func'
 
 export default Vue.extend({
     data() {
