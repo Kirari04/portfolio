@@ -48,6 +48,7 @@
             height: 78%;
             font-size: 30pt;
             transition: var.$ani_slow ease;
+            overflow: hidden;
             &.hidden{
                 opacity: 0;
                 pointer-events: none;
