@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { showClassBetween, hideClassBetween, percentageSteps } from '@/script/func'
+import { showClassBetween, hideClassBetween, percentageSteps, percentageTranslateFocus } from '@/script/func'
 
 export default Vue.extend({
     props: {
@@ -79,5 +79,6 @@ export default Vue.extend({
         showClassBetween: showClassBetween,
         hideClassBetween: hideClassBetween,
         percentageSteps: percentageSteps,
+        percentageTranslateFocus: percentageTranslateFocus,
     },
 })

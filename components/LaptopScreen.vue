@@ -1,10 +1,13 @@
+
+import { transform } from '@babel/core';
+
 <template>
     <div class="screen_container">
         <div :class="`frame mywork ${hideClassBetween(windowPosition, mywork_start, mywork_end, 'hidden')}`">
             <h2 class="title">
                 <TextItems :texts="lang.$.mywork.title" />
             </h2>
-            <ul>
+            <ul :style="{ transform: `translateY(${percentageTranslateFocus(windowPosition, mywork_start, mywork_end, step, 1, 70)}%)`, }">
                 <li v-for="(mywork_item, i) in lang.$.mywork.list" :key="i"
                     :class="`${showClassBetween(windowPosition, (((1 + i) * step) + mywork_start), (((2 + i) * step) + mywork_start), 'mark')}`">
                     <TextItems :texts="mywork_item.txt" />
@@ -21,8 +24,10 @@
         <div :class="`frame canCode ${hideClassBetween(windowPosition, canCode_start, canCode_end, 'hidden')}`">
             <h2 class="title">
                 <TextItems :texts="lang.$.canCode.title" />
+                <p></p>
             </h2>
-            <ul>
+            <ul
+                :style="{ transform: `translateY(${percentageTranslateFocus(windowPosition, canCode_start, canCode_end, step, 1, 15)}%)`, }">
                 <li v-for="(lang, i) in lang.$.canCode.langs" :key="i">
                     <!-- Icon -->
                     <img v-if="lang.icon"
@@ -58,7 +63,8 @@
             <h2 class="title">
                 <TextItems :texts="lang.$.canFramework.title" />
             </h2>
-            <ul>
+            <ul
+                :style="{ transform: `translateY(${percentageTranslateFocus(windowPosition, canFramework_start, canFramework_end, step, 1, 0)}%)`, }">
                 <li v-for="(lang, i) in lang.$.canFramework.langs" :key="i">
                     <!-- Icon -->
                     <img v-if="lang.icon"
@@ -141,6 +147,7 @@
             flex-direction: column;
             list-style-type: none;
             z-index: 3;
+            transition: var.$ani ease;
 
             >li {
                 color: var.$blue_light;
@@ -184,6 +191,8 @@
         >.title {
             color: var.$highlight_light;
             font-size: var.$font_size;
+            position: relative;
+            z-index: 2;
         }
 
         >ul {
@@ -192,6 +201,7 @@
             flex-direction: column;
             list-style-type: none;
             z-index: 3;
+            transition: var.$ani ease;
 
             >li {
                 color: var.$blue_light;
@@ -206,6 +216,7 @@
                     border-radius: .5rem;
                     transition: var.$ani;
                     filter: brightness(.2);
+
                     &.mark {
                         filter: brightness(1);
                     }
