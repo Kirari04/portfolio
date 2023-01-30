@@ -177,7 +177,7 @@ export const $: LanguagePackage = {
                     {txt: 'Self-taught '},
                 ],
                 icon: require('@/icons/express.svg'),
-                color: '#fff'
+                color: '#000000'
             },
             {
                 name: 'Spring',
@@ -188,7 +188,7 @@ export const $: LanguagePackage = {
                 teaching: [
                     {txt: 'School '},
                 ],
-                icon: require('@/icons/express.svg'),
+                icon: require('@/icons/spring.svg'),
                 color: '#6DB33F'
             },
         ]
