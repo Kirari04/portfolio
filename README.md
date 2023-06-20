@@ -1,3 +1,3 @@
 # Wellcome to my personal Portfolio
 
-&copy; saminskij.ch - Some Rights Reserverd
+&copy; Lev Saminskij - Some Rights Reserverd
